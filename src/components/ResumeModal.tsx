@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import { X, ShieldCheck } from 'lucide-react';
+import { X, Download } from 'lucide-react';
 
-interface CertModalProps {
+interface ResumeModalProps {
   open: boolean;
   onClose: () => void;
 }
 
-export default function CertModal({ open, onClose }: CertModalProps) {
+export default function ResumeModal({ open, onClose }: ResumeModalProps) {
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
@@ -26,7 +26,7 @@ export default function CertModal({ open, onClose }: CertModalProps) {
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      aria-label="Certificate viewer"
+      aria-label="Resume viewer"
     >
       <button className="viewer-close" onClick={onClose} aria-label="Close">
         <X size={20} />
@@ -35,18 +35,22 @@ export default function CertModal({ open, onClose }: CertModalProps) {
       <div className="viewer-scroll" onClick={e => e.stopPropagation()}>
         <div className="viewer-inner">
           <div className="viewer-topbar">
-            <span className="viewer-hint">
-              <ShieldCheck size={13} />
-              View only — right-click disabled
-            </span>
+            <span className="viewer-hint">Swati Lad — Resume</span>
+            <a
+              href="/Swati_Resume.pdf"
+              download
+              className="btn btn-primary"
+              style={{ padding: '8px 18px', fontSize: '13px' }}
+            >
+              <Download size={14} />
+              Download PDF
+            </a>
           </div>
 
-          <img
-            src="/Executive%20Post%20Graduate%20Certification%20in%20UI%20UX%20Design%20(1).jpg"
-            alt="Executive Post Graduate Certification in UI UX Design — iHUB DivyaSampark, IIT Roorkee"
-            className="viewer-cert-img"
-            draggable={false}
-            onContextMenu={e => e.preventDefault()}
+          <iframe
+            src="/Swati_Resume.pdf#toolbar=0&navpanes=0&scrollbar=1"
+            title="Swati Lad Resume"
+            className="viewer-pdf"
           />
         </div>
       </div>

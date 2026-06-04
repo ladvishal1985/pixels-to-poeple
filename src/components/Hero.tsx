@@ -1,9 +1,13 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Mail, Phone, Award } from 'lucide-react';
+import { MapPin, Mail, Phone, Award, FileText } from 'lucide-react';
+import ResumeModal from './ResumeModal';
 
 const fade = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0 } };
 
 export default function Hero() {
+  const [resumeOpen, setResumeOpen] = useState(false);
+
   return (
     <section className="hero" id="hero">
       <div className="hero-inner">
@@ -37,10 +41,10 @@ export default function Hero() {
             <a href="#case-study" className="btn btn-primary">
               View Case Study
             </a>
-            {/* Drop your resume PDF into /public/Swati_Resume.pdf */}
-            <a href="/Swati_Resume.pdf" className="btn btn-outline" download>
-              Download Resume
-            </a>
+            <button className="btn btn-outline" onClick={() => setResumeOpen(true)}>
+              <FileText size={16} />
+              View Resume
+            </button>
             <a href="#contact" className="btn btn-ghost">
               Contact Me
             </a>
@@ -104,6 +108,8 @@ export default function Hero() {
           </div>
         </motion.div>
       </div>
+
+      <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
     </section>
   );
 }
