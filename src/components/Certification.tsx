@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from '../hooks/useInView';
-import { BadgeCheck, Calendar, Hash, Clock } from 'lucide-react';
+import { BadgeCheck, Calendar, Hash, Clock, Eye } from 'lucide-react';
+import CertModal from './CertModal';
 
 export default function Certification() {
   const [ref, inView] = useInView<HTMLElement>();
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <section className="certification" id="certification" ref={ref}>
@@ -65,9 +68,20 @@ export default function Certification() {
                 <span>Duration: <strong>8-Month Executive Programme</strong></span>
               </div>
             </div>
+
+            <button
+              className="btn btn-outline"
+              style={{ marginTop: '24px' }}
+              onClick={() => setModalOpen(true)}
+            >
+              <Eye size={16} />
+              View Certificate
+            </button>
           </div>
         </motion.div>
       </div>
+
+      <CertModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   );
 }
