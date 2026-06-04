@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { X, Download } from 'lucide-react';
+import { X, Download, ExternalLink } from 'lucide-react';
 
 interface ResumeModalProps {
   open: boolean;
@@ -36,22 +36,54 @@ export default function ResumeModal({ open, onClose }: ResumeModalProps) {
         <div className="viewer-inner">
           <div className="viewer-topbar">
             <span className="viewer-hint">Swati Lad — Resume</span>
-            <a
-              href="/Swati_Resume.pdf"
-              download
-              className="btn btn-primary"
-              style={{ padding: '8px 18px', fontSize: '13px' }}
-            >
-              <Download size={14} />
-              Download PDF
-            </a>
+            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+              <a
+                href="/Swati_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-ghost"
+                style={{ padding: '8px 14px', fontSize: '13px' }}
+              >
+                <ExternalLink size={13} />
+                Open in tab
+              </a>
+              <a
+                href="/Swati_Resume.pdf"
+                download
+                className="btn btn-primary"
+                style={{ padding: '8px 16px', fontSize: '13px' }}
+              >
+                <Download size={13} />
+                Download PDF
+              </a>
+            </div>
           </div>
 
-          <iframe
-            src="/Swati_Resume.pdf#toolbar=0&navpanes=0&scrollbar=1"
-            title="Swati Lad Resume"
+          {/* <object> works on Chrome/Firefox/desktop Safari.
+              iOS Safari falls through to the inner fallback div. */}
+          <object
+            data="/Swati_Resume.pdf"
+            type="application/pdf"
             className="viewer-pdf"
-          />
+            aria-label="Resume PDF"
+          >
+            <div className="viewer-pdf-fallback">
+              <p>PDF preview isn't supported on this browser.</p>
+              <a
+                href="/Swati_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline"
+              >
+                <ExternalLink size={15} />
+                Open PDF in new tab
+              </a>
+              <a href="/Swati_Resume.pdf" download className="btn btn-primary">
+                <Download size={15} />
+                Download PDF
+              </a>
+            </div>
+          </object>
         </div>
       </div>
     </div>
