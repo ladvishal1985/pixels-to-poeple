@@ -1,0 +1,51 @@
+interface LogoProps {
+  size?: number;
+}
+
+export default function Logo({ size = 36 }: LogoProps) {
+  const id = 'sl-grad';
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="SL logo mark"
+      role="img"
+    >
+      <defs>
+        <linearGradient id={id} x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#0A5E62" />
+          <stop offset="100%" stopColor="#19C4A8" />
+        </linearGradient>
+      </defs>
+
+      {/* Background rounded square */}
+      <rect width="40" height="40" rx="10" fill={`url(#${id})`} />
+
+      {/* Subtle highlight arc top-right */}
+      <circle cx="34" cy="6" r="14" fill="white" fillOpacity="0.07" />
+
+      {/* S — drawn as a path for precision */}
+      <path
+        d="M15.8 12.5 C13.4 12.5 11.5 13.8 11.5 15.7 C11.5 17.5 12.9 18.4 15.2 19.1
+           L16.4 19.5 C17.9 19.95 18.6 20.55 18.6 21.5 C18.6 22.6 17.6 23.3 16.1 23.3
+           C14.5 23.3 13.3 22.5 12.8 21.3 L11.2 22.2 C12 24 13.8 25 16.1 25
+           C18.8 25 20.7 23.5 20.7 21.4 C20.7 19.5 19.4 18.5 17 17.8
+           L15.8 17.4 C14.5 17 13.6 16.45 13.6 15.6 C13.6 14.65 14.5 14 15.8 14
+           C17 14 17.9 14.6 18.4 15.6 L20 14.7 C19.2 13.3 17.7 12.5 15.8 12.5 Z"
+        fill="white"
+      />
+
+      {/* L — clean vertical + horizontal */}
+      <path
+        d="M22.5 12.7 L22.5 24.8 L29.2 24.8 L29.2 23.2 L24.4 23.2 L24.4 12.7 Z"
+        fill="white"
+      />
+
+      {/* Accent dot bottom-left */}
+      <circle cx="9" cy="32" r="2" fill="white" fillOpacity="0.35" />
+    </svg>
+  );
+}
